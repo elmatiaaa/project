@@ -23,7 +23,7 @@ tab1, tab2, tab3, tab4, tab5 = st.tabs(["Import Data", "Preprocessing", "Modelli
 
 with tab1:
     st.write("Import Data")
-    data = pd.read_csv("https://raw.githubusercontent.com/Feb11F/dataset/main/credit_score.csv")
+    data = pd.read_csv("https://raw.githubusercontent.com/elmatiaaa/Machine-Learning/main/credit_score.csv")
     st.dataframe(data)
 
 with tab2:
