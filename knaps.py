@@ -128,7 +128,6 @@ with implementation:
         enc = OrdinalEncoder()
         a = enc.fit_transform(x)
         x=pd.DataFrame(a, columns=x.columns)
-        age=st.text_input('age')
         job=st.text_input('job')
         marital=st.text_input('marital')
         education=st.text_input('education')
@@ -146,7 +145,7 @@ with implementation:
         poutcome=st.text_input('poutcome')
         y=st.text_input('y')
 #x_new = ['x','y','y','t','l','f','c','b','g','e','c','s','s','w','w','p','w','o','p','k','s','m'] # hasil=0/e
-        x_new = [age,job,marital,education,default,balance,housing,loan,contact,day,month,duration,campaign,pdays,previous,poutcome,y] # hasil=1/p
+        x_new = [job,marital,education,default,balance,housing,loan,contact,day,month,duration,campaign,pdays,previous,poutcome,y] # hasil=1/p
         hinput=enc.transform(np.array([x_new]))
         hinput
         clf_pf = GaussianNB()
