@@ -174,4 +174,4 @@ with implementation:
         gaussian = GaussianNB()
         gaussian.fit(x_train, y_train)
         y_pred = gaussian.predict(hinput) 
-        st.write(y_pred)
+        st.write(y_pred) 
