@@ -1,177 +1,261 @@
-import sklearn
 import streamlit as st
-import pandas as pd 
-import numpy as np 
-import warnings
-from sklearn.metrics import make_scorer, accuracy_score,precision_score
-warnings.filterwarnings('ignore', category=UserWarning, append=True)
-
-# data
-df = pd.read_csv("https://raw.githubusercontent.com/elmatiaaa/Machine-Learning/main/data.csv")
-df.head()
-
-# normalisasi
-# data yang dipakai 2000 data
-# pemisahan class dan fitur
-df=df[:2000]
-from sklearn.preprocessing import OrdinalEncoder
-x = df.drop(df[['age']],axis=1)
-enc = OrdinalEncoder()
-a = enc.fit_transform(x)
-x=pd.DataFrame(a, columns=x.columns)
-
-# class
-y = df.loc[:, "age"]
-y = df['age'].values
-
-# Split Data
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn import preprocessing
+from sklearn.preprocessing import MinMaxScaler
 from sklearn.model_selection import train_test_split
-x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=1)
+from sklearn.neighbors import KNeighborsClassifier
+from numpy import array
+from sklearn import tree
+from sklearn.naive_bayes import GaussianNB
+from sklearn.preprocessing import StandardScaler
+from sklearn.metrics import confusion_matrix, accuracy_score, recall_score, precision_score, f1_score
+from sklearn.tree import DecisionTreeClassifier
+from collections import OrderedDict
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.ensemble import BaggingClassifier
+from sklearn.datasets import make_classification
+from sklearn.svm import SVC
+import altair as alt
+from sklearn.utils.validation import joblib
 
-st.set_page_config(page_title="Elmatiaa")
-@st.cache()
-def progress():
-    with st.spinner("Bentar ya....."):
-        time.sleep(1)
-        
-st.title("PROJECT PENAMBANGAN DATA")
 
-dataframe, preporcessing, modeling, implementation = st.tabs(
-    ["Data", "Prepocessing", "Modeling", "Implementation"])
 
-with dataframe:
-    st.write('Data Bank')
-    dataset,data= st.tabs(['Dataset',"data"])
-    with dataset:
+st.title("PROJEK PENAMBANGAN DATA")
+st.write("By: Febrian Achmad Syahputra")
+st.write("Grade: Penambangan Data C")
+upload_data,deskripsi, preporcessing, modeling, implementation = st.tabs(["Upload Data",'deskripsi' ,"Prepocessing", "Modeling", "Implementation"])
+
+
+with upload_data:
+    st.write("""# Upload File""")
+    st.write("Dataset yang digunakan adalah harumanis mango classification dataset yang diambil dari https://www.kaggle.com/datasets/uciml/red-wine-quality-cortez-et-al-2009")
+    st.write("Pada Dataset yang saya gunakan terdapat 3 fitur yaitu weight,lenght,dan circumference. Pada weight akan menunjukan berat dari mangga ,kemudian pada lenght akan menunjukan panjang dari mangga , dan yang terakhir terdapat circumference yang menunjukan lingkar dari mangga ")
+
+    
+    uploaded_files = st.file_uploader("Upload file CSV", accept_multiple_files=True)
+    for uploaded_file in uploaded_files:
+        df = pd.read_csv(uploaded_file)
+        st.write("Nama File Anda = ", uploaded_file.name)
         st.dataframe(df)
 
-        
+with deskripsi:
+
+    st.write("Dataset yang digunakan adalah harumanis mango classification dataset yang diambil dari https://www.kaggle.com/datasets/uciml/red-wine-quality-cortez-et-al-2009")
+    st.write("Pada Dataset yang saya gunakan terdapat 3 fitur yaitu weight,lenght,dan circumference. Pada weight akan menunjukan berat dari mangga ,kemudian pada lenght akan menunjukan panjang dari mangga , dan yang terakhir terdapat circumference yang menunjukan lingkar dari mangga ")
+
 with preporcessing:
-    st.write('Ordinal Encoder')
-    st.dataframe(x)
+    st.write("""# Preprocessing""")
+    df[['No','Weight','Length','Circumference','Grade']].agg(['min','max'])
+    X = df.drop(labels = ['Grade','No'],axis = 1)
+    y = df['Grade']
+    "### Normalize data hasil"
+    X
+
+    scaler = MinMaxScaler()
+    scaler.fit(X)
+    X = scaler.transform(X)
+    "### Normalize data transformasi"
+    X
+
+    X.shape, y.shape
+
+
+    labels = pd.get_dummies(df.Grade).columns.values.tolist()
+    
+    "### Label"
+    labels
+
+    # """## Normalisasi MinMax Scaler"""
+
+
+    scaler = MinMaxScaler()
+    scaler.fit(X)
+    X = scaler.transform(X)
+    X
+
+    X.shape, y.shape
+
+    le = preprocessing.LabelEncoder()
+    le.fit(y)
+    y = le.transform(y)
+    y
+
+    le.inverse_transform(y)
 
 with modeling:
-    # pisahkan fitur dan label
-    knn,naivebayes,decisiontree= st.tabs(
-        ["K-Nearest Neighbor","naivebayes","decisiontree"])
-    with knn:
-      from sklearn.neighbors import KNeighborsClassifier
-      knn = KNeighborsClassifier(n_neighbors=3)
-      knn.fit(x_train,y_train)
-      y_pred_knn = knn.predict(x_test) 
-      accuracy_knn=round(accuracy_score(y_test,y_pred_knn)* 100, 2)
-      acc_knn = round(knn.score(x_train, y_train) * 100, 2)
-      label_knn = pd.DataFrame(
-      data={'Label Test': y_test, 'Label Predict': y_pred_knn}).reset_index()
-      st.success(f'Tingkat akurasi = {acc_knn}')
-      st.dataframe(label_knn)
+    X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=4)
+    from sklearn.preprocessing import StandardScaler
+    sc = StandardScaler()
+    X_train = sc.fit_transform(X_train)
+    X_test = sc.transform(X_test)
+    # from sklearn.feature_extraction.text import CountVectorizer
+    # cv = CountVectorizer()
+    # X_train = cv.fit_transform(X_train)
+    # X_test = cv.fit_transform(X_test)
+    st.write("""# Modeling """)
+    st.subheader("Berikut ini adalah pilihan untuk Modeling")
+    st.write("Pilih Model yang Anda inginkan untuk Cek Akurasi")
+    naive = st.checkbox('Naive Bayes')
+    kn = st.checkbox('K-Nearest Neighbor')
+    des = st.checkbox('Decision Tree')
+    mod = st.button("Modeling")
 
-    with naivebayes:
-        #Metrics
-        from sklearn.metrics import make_scorer, accuracy_score,precision_score
-        from sklearn.metrics import classification_report
-        from sklearn.metrics import confusion_matrix
-        from sklearn.metrics import accuracy_score ,precision_score,recall_score,f1_score
+    # NB
+    GaussianNB(priors=None)
 
-        #Model Select
-        from sklearn.model_selection import KFold,train_test_split,cross_val_score
-        from sklearn.ensemble import RandomForestClassifier
-        from sklearn.model_selection import train_test_split
-        from sklearn.linear_model import  LogisticRegression
-        from sklearn.ensemble import RandomForestClassifier
-        from sklearn import linear_model
-        from sklearn.linear_model import SGDClassifier
-        from sklearn.tree import DecisionTreeClassifier
-        from sklearn.neighbors import KNeighborsClassifier
-        from sklearn.svm import SVC, LinearSVC
-        from sklearn.naive_bayes import GaussianNB
-        from sklearn.preprocessing import LabelEncoder
-        le = LabelEncoder()
-        y = le.fit_transform
-        gaussian = GaussianNB()
-        gaussian.fit(x_train, y_train)
-        y_pred = gaussian.predict(x_test) 
-        accuracy_nb=round(accuracy_score(y_test,y_pred)* 100, 2)
-        acc_gaussian = round(gaussian.score(x_train, y_train) * 100, 2)
+    # Fitting Naive Bayes Classification to the Training set with linear kernel
+    nvklasifikasi = GaussianNB()
+    nvklasifikasi = nvklasifikasi.fit(X_train, y_train)
 
-        cm = confusion_matrix(y_test, y_pred)
-        accuracy = accuracy_score(y_test,y_pred)
-        precision =precision_score(y_test, y_pred,average='micro')
-        recall =  recall_score(y_test, y_pred,average='micro')
-        f1 = f1_score(y_test,y_pred,average='micro')
-        print('Confusion matrix for Naive Bayes\n',cm)
-        print('accuracy_Naive Bayes: %.3f' %accuracy)
-        print('precision_Naive Bayes: %.3f' %precision)
-        print('recall_Naive Bayes: %.3f' %recall)
-        print('f1-score_Naive Bayes : %.3f' %f1)
-        st.success(accuracy)
-        label_nb = pd.DataFrame(
-        data={'Label Test': y_test, 'Label Predict': y_pred})
-        label_nb
+    # Predicting the Test set results
+    y_pred = nvklasifikasi.predict(X_test)
+    
+    y_compare = np.vstack((y_test,y_pred)).T
+    nvklasifikasi.predict_proba(X_test)
+    akurasi = round(100 * accuracy_score(y_test, y_pred))
+    # akurasi = 10
+
+    # KNN 
+    K=10
+    knn=KNeighborsClassifier(n_neighbors=K)
+    knn.fit(X_train,y_train)
+    y_pred=knn.predict(X_test)
+
+    skor_akurasi = round(100 * accuracy_score(y_test,y_pred))
+
+    # DT
+
+    dt = DecisionTreeClassifier()
+    dt.fit(X_train, y_train)
+    # prediction
+    dt.score(X_test, y_test)
+    y_pred = dt.predict(X_test)
+    #Accuracy
+    akurasiii = round(100 * accuracy_score(y_test,y_pred))
+
+    if naive :
+        if mod :
+            st.write('Model Naive Bayes accuracy score: {0:0.2f}'. format(akurasi))
+    if kn :
+        if mod:
+            st.write("Model KNN accuracy score : {0:0.2f}" . format(skor_akurasi))
+    if des :
+        if mod :
+            st.write("Model Decision Tree accuracy score : {0:0.2f}" . format(akurasiii))
+    
+    eval = st.button("Evaluasi semua model")
+    if eval :
+        # st.snow()
+        source = pd.DataFrame({
+            'Nilai Akurasi' : [akurasi,skor_akurasi,akurasiii],
+            'Nama Model' : ['Naive Bayes','KNN','Decision Tree']
+        })
+
+        bar_chart = alt.Chart(source).mark_bar().encode(
+            y = 'Nilai Akurasi',
+            x = 'Nama Model'
+        )
+
+        st.altair_chart(bar_chart,use_container_width=True)
+
+# with modeling:
+
+#     st.markdown("# Model")
+#     # membagi data menjadi data testing(20%) dan training(80%)
+    # X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=0.2,random_state=4)
+
+#     # X_train.shape, X_test.shape, y_train.shape, y_test.shape
+
+#     nb = st.checkbox("Metode Naive Bayes")
+#     knn = st.checkbox("Metode KNN")
+#     dt = st.checkbox("Metode Decision Tree")
+#     sb = st.button("submit")
+
+#     #Naive Bayes
+#     # Feature Scaling to bring the variable in a single scale
+#     sc = StandardScaler()
+#     X_train = sc.fit_transform(X_train)
+#     X_test = sc.transform(X_test)
+
+#     GaussianNB(priors=None)
+#     # Fitting Naive Bayes Classification to the Training set with linear kernel
+#     nvklasifikasi = GaussianNB()
+#     nvklasifikasi = nvklasifikasi.fit(X_train, y_train)
+
+#     # Predicting the Test set results
+#     y_pred = nvklasifikasi.predict(X_test)
         
-        
-    with decisiontree:
-        from sklearn.tree import DecisionTreeClassifier
-        d3 = DecisionTreeClassifier()
-        d3.fit(x_train, y_train)
-        y_predic = d3.predict(x_test)
-        data_predic = pd.concat([pd.DataFrame(y_test).reset_index(drop=True), pd.DataFrame(y_predic, columns=["Predict"]).reset_index(drop=True)], axis=1)        
-        from sklearn.metrics import accuracy_score
-        a=f'acuraty = {"{:,.2f}".format(accuracy_score(y_test, y_predic)*100)}%'
-        st.success(a)
-        data_predic
-        
+#     y_compare = np.vstack((y_test,y_pred)).T
+#     nvklasifikasi.predict_proba(X_test)
+
+#     akurasi = round(100 * accuracy_score(y_test, y_pred))
+
+#     #Decision tree
+#     dt = DecisionTreeClassifier()
+#     dt.fit(X_train, y_train)
+
+#     # prediction
+#     dt.score(X_test, y_test)
+#     y_pred = dt.predict(X_test)
+#     #Accuracy
+#     akur = round(100 * accuracy_score(y_test,y_pred))
+
+#     K=10
+#     knn=KNeighborsClassifier(n_neighbors=K)
+#     knn.fit(X_train,y_train)
+#     y_pred=knn.predict(X_test)
+
+#     skor_akurasi = round(100 * accuracy_score(y_test,y_pred))
+    
+
+#     if nb:
+#         if sb:
+
+#             """## Naive Bayes"""
+            
+#             st.write('Model Naive Bayes accuracy score: {0:0.2f}'. format(akurasi))
+
+#     if knn:
+#         if sb:
+#             """## KNN"""
+
+#             st.write("Model KNN accuracy score : {0:0.2f}" . format(skor_akurasi))
+    
+#     if dt:
+#         if sb:
+#             """## Decision Tree"""
+#             st.write('Model Decission Tree Accuracy Score: {0:0.2f}'.format(akur))
+
 with implementation:
-        df=df[:2000]
-        from sklearn.preprocessing import OrdinalEncoder
-        x = df.drop(df[['age']],axis=1)
-        enc = OrdinalEncoder()
-        a = enc.fit_transform(x)
-        x=pd.DataFrame(a, columns=x.columns)
-        job=st.text_input('job')
-        marital=st.text_input('marital')
-        education=st.text_input('education')
-        default=st.text_input('default')
-        balance=st.text_input('balance')
-        housing=st.text_input('housing')
-        loan=st.text_input('loan')
-        contact=st.text_input('contact')
-        day=st.text_input('day')
-        month=st.text_input('month')
-        duration=st.text_input('duration')
-        campaign=st.text_input('campaign')
-        pdays=st.text_input('pdays')
-        previous=st.text_input('previous')
-        poutcome=st.text_input('poutcome')
-        y=st.text_input('y')
-#x_new = ['x','y','y','t','l','f','c','b','g','e','c','s','s','w','w','p','w','o','p','k','s','m'] # hasil=0/e
-        x_new = [job,marital,education,default,balance,housing,loan,contact,day,month,duration,campaign,pdays,previous,poutcome,y] # hasil=1/p
-        hinput=enc.transform(np.array([x_new]))
-        hinput
-        clf_pf = GaussianNB()
-        clf_pf.predict([hinput])
-        #Metrics
-        from sklearn.metrics import make_scorer, accuracy_score,precision_score
-        from sklearn.metrics import classification_report
-        from sklearn.metrics import confusion_matrix
-        from sklearn.metrics import accuracy_score ,precision_score,recall_score,f1_score
+    st.write("# Implementation")
+    Weight = st.number_input('Masukkan Berat Mangga')
+    Length = st.number_input('Masukkan Panjnag Mangga')
+    circumference = st.number_input('Masukkan Lingkar Mangga')
 
-        #Model Select
-        from sklearn.model_selection import KFold,train_test_split,cross_val_score
-        from sklearn.ensemble import RandomForestClassifier
-        from sklearn.model_selection import train_test_split
-        from sklearn.linear_model import  LogisticRegression
-        from sklearn.ensemble import RandomForestClassifier
-        from sklearn import linear_model
-        from sklearn.linear_model import SGDClassifier
-        from sklearn.tree import DecisionTreeClassifier
-        from sklearn.neighbors import KNeighborsClassifier
-        from sklearn.svm import SVC, LinearSVC
-        from sklearn.naive_bayes import GaussianNB
-        from sklearn.preprocessing import LabelEncoder
-        le = LabelEncoder()
-        y = le.fit_transform
-        gaussian = GaussianNB()
-        gaussian.fit(x_train, y_train)
-        y_pred = gaussian.predict(hinput) 
-        st.write(y_pred) 
+    def submit():
+        # input
+        inputs = np.array([[
+            Weight,Length,circumference
+        ]])
+        # st.write(inputs)
+        # baru = pd.DataFrame(inputs)
+        # input = pd.get_dummies(baru)
+        # st.write(input)
+        # inputan = np.array(input)
+        # import label encoder
+        le = joblib.load("le.save")
+        model1 = joblib.load("tre.joblib")
+        y_pred3 = model1.predict(inputs)
+        if le.inverse_transform(y_pred3)[0]==1:
+            hasilakhir='B'
+        else :
+            hasilakhir='A'
+        st.write(f"Berdasarkan data yang Anda masukkan, maka mangga dinyatakan mangga memiliki grade: {hasilakhir}")
+
+    all = st.button("Submit")
+    if all :
+        st.balloons()
+        submit()
