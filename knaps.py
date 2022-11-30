@@ -43,8 +43,8 @@ with preporcessing:
     df.stroke.value_counts()
     df = df.drop(columns=["id","bmi"])
 
-    X = df.drop(columns="stroke")
-    y = df.stroke
+    X = df.drop(columns="sulphates")
+    y = df.sulphates
     "### Membuang fitur yang tidak diperlukan"
     df
 
@@ -57,7 +57,7 @@ with preporcessing:
 
     le.inverse_transform(y)
 
-    labels = pd.get_dummies(df.stroke).columns.values.tolist()
+    labels = pd.get_dummies(df.sulphates).columns.values.tolist()
 
     "### Label"
     labels
@@ -68,38 +68,7 @@ with preporcessing:
 
     dataubah=df.drop(columns=['fixed_acidity', 'volatile_acidity', 'citric_acid', 'residual_sugar', 'chlorides', 'free_sulfur_dioxide', 'total_sulfur_dioxide', 'density', 'pH', 'sulphates'])
     dataubah
-
-    "### Normalize data gender"
-    data_gen=df[['gender']]
-    gen = pd.get_dummies(data_gen)
-    gen
-
-    # "### Normalize data Hypertension"
-    # data_hypertension=df[['hypertension']]
-    # hypertension = pd.get_dummies(data_hypertension)
-    # hypertension
-
-    "### Normalize data married"
-    data_married=df[['ever_married']]
-    married = pd.get_dummies(data_married)
-    married
-
-    "### Normalize data work"
-    data_work=df[['work_type']]
-    work = pd.get_dummies(data_work)
-    work
-
-    "### Normalize data residence"
-    data_residence=df[['Residence_type']]
-    residence = pd.get_dummies(data_residence)
-    residence
-
-    "### Normalize data smoke"
-    data_smoke=df[['smoking_status']]
-    smoke = pd.get_dummies(data_smoke)
-    smoke
-
-    dataOlah = pd.concat([gen,married,work,residence,smoke], axis=1)
+    dataOlah = pd.concat([fixed_acidity,volatile_acidity,citric_acid,residual_sugar,chlorides,free_sulfur_dioxide,total_sulfur_dioxide,density,pH], axis=1)
     dataHasil = pd.concat([df,dataOlah], axis = 1)
 
     X = dataHasil.drop(columns=["fixed_acidity", "volatile_acidity", "citric_acid", "residual_sugar", "chlorides", "free_sulfur_dioxide", "total_sulfur_dioxide", "density", "pH", "sulphates"])
