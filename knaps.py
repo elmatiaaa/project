@@ -15,20 +15,20 @@ df.head()
 # pemisahan class dan fitur
 df=df[:2000]
 from sklearn.preprocessing import OrdinalEncoder
-x = df.drop(df[['class']],axis=1)
+x = df.drop(df[['age']],axis=1)
 enc = OrdinalEncoder()
 a = enc.fit_transform(x)
 x=pd.DataFrame(a, columns=x.columns)
 
 # class
-y = df.loc[:, "class"]
-y = df['class'].values
+y = df.loc[:, "age"]
+y = df['age'].values
 
 # Split Data
 from sklearn.model_selection import train_test_split
 x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.2,random_state=1)
 
-st.set_page_config(page_title="Ima")
+st.set_page_config(page_title="Elmatiaa")
 @st.cache()
 def progress():
     with st.spinner("Bentar ya....."):
@@ -124,7 +124,7 @@ with modeling:
 with implementation:
         df=df[:2000]
         from sklearn.preprocessing import OrdinalEncoder
-        x = df.drop(df[['class']],axis=1)
+        x = df.drop(df[['age']],axis=1)
         enc = OrdinalEncoder()
         a = enc.fit_transform(x)
         x=pd.DataFrame(a, columns=x.columns)
