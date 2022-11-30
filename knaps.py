@@ -7,7 +7,7 @@ from sklearn.metrics import make_scorer, accuracy_score,precision_score
 warnings.filterwarnings('ignore', category=UserWarning, append=True)
 
 # data
-df = pd.read_csv("https://raw.githubusercontent.com/08-Ahlaqul-Karimah/machine-Learning/main/mushrooms.csv")
+df = pd.read_csv("https://raw.githubusercontent.com/elmatiaaa/Machine-Learning/main/data.csv")
 df.head()
 
 # normalisasi
@@ -34,13 +34,13 @@ def progress():
     with st.spinner("Bentar ya....."):
         time.sleep(1)
         
-st.title("UAS PENDAT")
+st.title("PROJECT PENAMBANGAN DATA")
 
 dataframe, preporcessing, modeling, implementation = st.tabs(
-    ["Jamur Data", "Prepocessing", "Modeling", "Implementation"])
+    ["Data", "Prepocessing", "Modeling", "Implementation"])
 
 with dataframe:
-    st.write('Data Jamur')
+    st.write('Data Bank')
     dataset,data= st.tabs(['Dataset',"data"])
     with dataset:
         st.dataframe(df)
@@ -128,30 +128,25 @@ with implementation:
         enc = OrdinalEncoder()
         a = enc.fit_transform(x)
         x=pd.DataFrame(a, columns=x.columns)
-        capshape=st.text_input('cap-shape: bell=b,conical=c,convex=x,flat=f, knobbed=k,sunken=s')
-        capsurface=st.text_input('cap-surface: fibrous=f,grooves=g,scaly=y,smooth=s')
-        capcolor=st.text_input('cap-color: brown=n,buff=b,cinnamon=c,gray=g,green=r,pink=p,purple=u,red=e,white=w,yellow=y')
-        bruises=st.text_input('bruises: bruises=t,no=f')
-        odor=st.text_input('odor: almond=a,anise=l,creosote=c,fishy=y,foul=f,musty=m,none=n,pungent=p,spicy=s')
-        gillattachment=st.text_input('gill-attachment: attached=a,descending=d,free=f,notched=n')
-        gillspacing=st.text_input('gill-spacing: close=c,crowded=w,distant=d')
-        gillsize=st.text_input('gill-size: broad=b,narrow=n')
-        gillcolor=st.text_input('gill-color: black=k,brown=n,buff=b,chocolate=h,gray=g, green=r,orange=o,pink=p,purple=u,red=e,white=w,yellow=y')
-        stalkshape=st.text_input('stalk-shape: enlarging=e,tapering=t')
-        stalkroot=st.text_input('stalk-root: bulbous=b,club=c,cup=u,equal=e,rhizomorphs=z,rooted=r,missing=?')
-        stalksurfaceabovering=st.text_input('stalk-surface-above-ring: fibrous=f,scaly=y,silky=k,smooth=s')
-        stalksurfacebelowring=st.text_input('stalk-surface-below-ring: fibrous=f,scaly=y,silky=k,smooth=s')
-        stalkcolorabovering=st.text_input('stalk-color-above-ring: brown=n,buff=b,cinnamon=c,gray=g,orange=o,pink=p,red=e,white=w,yellow=y')
-        stalkcolorbelowring=st.text_input('stalk-color-below-ring: brown=n,buff=b,cinnamon=c,gray=g,orange=o,pink=p,red=e,white=w,yellow=y')
-        veiltype=st.text_input('veil-type: partial=p,universal=u')
-        veilcolor=st.text_input('veil-color: brown=n,orange=o,white=w,yellow=y')
-        ringnumber=st.text_input('ring-number: none=n,one=o,two=t')
-        ringtype=st.text_input('ring-type: cobwebby=c,evanescent=e,flaring=f,large=l,none=n,pendant=p,sheathing=s,zone=z')
-        sporeprintcolor=st.text_input('spore-print-color: black=k,brown=n,buff=b,chocolate=h,green=r,orange=o,purple=u,white=w,yellow=y')
-        population=st.text_input('population: abundant=a,clustered=c,numerous=n,scattered=s,several=v,solitary=y')
-        habitat=st.text_input('habitat: grasses=g,leaves=l,meadows=m,paths=p,urban=u,waste=w,woods=d')
+        age=st.text_input('age')
+        job=st.text_input('job')
+        marital=st.text_input('marital')
+        education=st.text_input('education')
+        default=st.text_input('default')
+        balance=st.text_input('balance')
+        housing=st.text_input('housing')
+        loan=st.text_input('loan')
+        contact=st.text_input('contact')
+        day=st.text_input('day')
+        month=st.text_input('month')
+        duration=st.text_input('duration')
+        campaign=st.text_input('campaign')
+        pdays=st.text_input('pdays')
+        previous=st.text_input('previous')
+        poutcome=st.text_input('poutcome')
+        y=st.text_input('y')
 #x_new = ['x','y','y','t','l','f','c','b','g','e','c','s','s','w','w','p','w','o','p','k','s','m'] # hasil=0/e
-        x_new = [capshape,capsurface,capcolor,bruises,odor,gillattachment,gillspacing,gillsize,gillcolor,stalkshape,stalkroot,stalksurfaceabovering,stalksurfacebelowring,stalkcolorabovering,stalkcolorbelowring,veiltype,veilcolor,ringnumber,ringtype,sporeprintcolor,population,habitat] # hasil=1/p
+        x_new = [age,job,marital,education,default,balance,housing,loan,contact,day,month,duration,campaign,pdays,previous,poutcome,y] # hasil=1/p
         hinput=enc.transform(np.array([x_new]))
         hinput
         clf_pf = GaussianNB()
