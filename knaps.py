@@ -428,5 +428,5 @@ with implementation:
 
     all = st.button("Submit")
     if all :
-        st.balloons()
+        st.balloons() 
         submit()
