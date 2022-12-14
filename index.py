@@ -26,25 +26,15 @@ with data_set_description:
     st.write("###### Data Set Ini Adalah : (Mobile Price Classification) ")
     st.write("###### Sumber Data Set dari Kaggle : https://www.kaggle.com/code/akshitmadan/mobile-price-classification-knn/data")
     st.write("""###### Penjelasan setiap kolom : """)
-    st.write("""1. id :
-    
-    id: Pengenalan
+    st.write("""1. id: Pengenalan
     """)
-    st.write("""2. battery power :
-
-    Baterai power Total energi yang dapat disimpan baterai dalam satu waktu diukur dalam mAh
+    st.write("""2. battery power : Baterai power Total energi yang dapat disimpan baterai dalam satu waktu diukur dalam mAh
     """)
-    st.write("""3. bluethooth :
-
-    bluethooth adalah spesifikasi industri untuk jaringan kawasan pribadi (personal area networks atau PAN) tanpa kabel. Bluetooth menghubungkan dan dapat dipakai untuk melakukan tukar-menukar informasi di antara peralatan-peralatan.
+    st.write("""3. bluethooth : bluethooth adalah spesifikasi industri untuk jaringan kawasan pribadi (personal area networks atau PAN) tanpa kabel. Bluetooth menghubungkan dan dapat dipakai untuk melakukan tukar-menukar informasi di antara peralatan-peralatan.
     """)
-    st.write("""4. clock speed :
-
-    kecepatan di mana mikroprosesor mengeksekusi instruksi
+    st.write("""4. clock speed : kecepatan di mana mikroprosesor mengeksekusi instruksi
     """)
-    st.write("""5. dual sim :
-
-    Apakah mendukung dual sim atau tidak
+    st.write("""5. dual sim : Apakah mendukung dual sim atau tidak
     """)
     st.write("""6. fc :
 
