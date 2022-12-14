@@ -82,7 +82,7 @@ with data_set_description:
     2. 1    : ya
     
     """)
-    st.write("###### Aplikasi ini untuk : Mobile Price Classification (Klasifikasi ikan di Pasar) ")
+    st.write("###### Aplikasi ini untuk : Mobile Price Classification (Klasifikasi Harga Seluler) ")
     st.write("###### Source Code Aplikasi ada di Github anda bisa acces di link : https://github.com/elmatiaaa/project")
 
 with upload_data:
