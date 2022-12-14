@@ -36,69 +36,37 @@ with data_set_description:
     """)
     st.write("""5. dual sim : Apakah mendukung dual sim atau tidak
     """)
-    st.write("""6. fc :
-
-    Kamera depan mega piksel
+    st.write("""6. fc : Kamera depan mega piksel
     """)
-    st.write("""7. four_g :
-
-    Apakah 4G atau tidak
+    st.write("""7. four_g : Apakah 4G atau tidak
     """)
-    st.write("""8. int_memory :
-    
-    Memori Internal dalam Gigabyte
+    st.write("""8. int_memory : Memori Internal dalam Gigabyte
     """)
-    st.write("""9. m_dep :
-
-    Kedalaman Seluler dalam cm
+    st.write("""9. m_dep : Kedalaman Seluler dalam cm
     """)
-    st.write("""10. mobile_wt :
-
-    Berat ponsel
+    st.write("""10. mobile_wt : Berat ponsel
     """)
-    st.write("""11. n_cores :
-
-    Jumlah inti prosesor
+    st.write("""11. n_cores : Jumlah inti prosesor
     """)
-    st.write("""12. pc:
-
-    Mega piksel Kamera Utama
+    st.write("""12. pc: Mega piksel Kamera Utama
     """)
-    st.write("""13. px_height :
-
-    Tinggi Resolusi Piksel
+    st.write("""13. px_height : Tinggi Resolusi Piksel
     """)
-    st.write("""14. px_width :
-
-    Lebar Resolusi Piksel
+    st.write("""14. px_width : Lebar Resolusi Piksel
     """)
-    st.write("""15. ram :
-
-    Memori Akses Acak dalam Megabita
+    st.write("""15. ram : Memori Akses Acak dalam Megabita
     """)
-    st.write("""16. sc_h :
-
-    Tinggi layar ponsel dalam cm
+    st.write("""16. sc_h : Tinggi layar ponsel dalam cm
     """)
-    st.write("""17. sc_w :
-
-    Lebar layar ponsel dalam cm
+    st.write("""17. sc_w : Lebar layar ponsel dalam cm
     """)
-    st.write("""18. talk time :
-
-    waktu terlama satu kali pengisian daya baterai akan bertahan saat Anda berada
+    st.write("""18. talk time : waktu terlama satu kali pengisian daya baterai akan bertahan saat Anda berada
     """)
-    st.write("""19. three_g :
-
-    Memiliki 3G atau tidak
+    st.write("""19. three_g : Memiliki 3G atau tidak
     """)
-    st.write("""20. touch screen :
-
-    Memiliki layar sentuh atau tidak
+    st.write("""20. touch screen : Memiliki layar sentuh atau tidak
     """)
-    st.write("""21. wifi:
-
-    Ada wifi atau tidak
+    st.write("""21. wifi: Ada wifi atau tidak
     """)
     
     
