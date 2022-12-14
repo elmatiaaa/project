@@ -23,38 +23,95 @@ with data_set_description:
     st.write("##### Nim   : 200411100113 ")
     st.write("##### Kelas : Penambangan Data C ")
     st.write("""# Data Set Description """)
-    st.write("###### Data Set Ini Adalah : Mobile Price Classification) ")
+    st.write("###### Data Set Ini Adalah : (Mobile Price Classification) ")
     st.write("###### Sumber Data Set dari Kaggle : https://www.kaggle.com/code/akshitmadan/mobile-price-classification-knn/data")
     st.write("""###### Penjelasan setiap kolom : """)
-    st.write("""1. Species (Jenis ) :
+    st.write("""1. id :
     
-    jenis :Spesies atau jenis adalah suatu peringkat taksonomi yang dipakai dalam klasifikasi biologis untuk merujuk pada satu atau beberapa kelompok individu makhluk hidup (populasi) yang serupa dan dapat saling membuahi satu sama lain di dalam kelompoknya (saling berbagi gen) sehingga menghasilkan keturunan yang fertil (subur).
-    ikan : Ikan adalah anggota vertebrata poikilotermik (berdarah dingin)[1] yang hidup di air dan bernapas dengan insang. Ikan merupakan kelompok vertebrata yang paling beraneka ragam dengan jumlah spesies lebih dari 27,000 di seluruh dunia. Secara taksonomi, ikan tergolong kelompok paraphyletic yang hubungan kekerabatannya masih diperdebatkan; biasanya ikan dibagi menjadi ikan tanpa rahang (kelas Agnatha, 75 spesies termasuk lamprey dan ikan hag), ikan bertulang rawan (kelas Chondrichthyes, 800 spesies termasuk hiu dan pari), dan sisanya tergolong ikan bertulang keras (kelas Osteichthyes).
+    id: Pengenalan
     """)
-    st.write("""2. weight (Bobot) :
+    st.write("""2. battery power :
 
-    bobot : bobot yang di ada di dataset
+    Baterai power Total energi yang dapat disimpan baterai dalam satu waktu diukur dalam mAh
     """)
-    st.write("""3. length1 (Panjang1) :
+    st.write("""3. bluethooth :
 
-    panjang1 : panjang ikan yang ada  di dataset
+    bluethooth adalah spesifikasi industri untuk jaringan kawasan pribadi (personal area networks atau PAN) tanpa kabel. Bluetooth menghubungkan dan dapat dipakai untuk melakukan tukar-menukar informasi di antara peralatan-peralatan.
     """)
-    st.write("""4. length1 (Panjang2) :
+    st.write("""4. clock speed :
 
-    panjang2 : panjang ikan yang ada  di dataset
+    kecepatan di mana mikroprosesor mengeksekusi instruksi
     """)
-    st.write("""5. length2 (Panjang3) :
+    st.write("""5. dual sim :
 
-    panjang3 : panjang ikan yang ada  di dataset
+    Apakah mendukung dual sim atau tidak
     """)
-    st.write("""6. height (Tinggi) :
+    st.write("""6. fc :
 
-    tinggi : tinggi ikan yang ada di sataset
+    Kamera depan mega piksel
     """)
-    st.write("""7. width (Lrbar) :
+    st.write("""7. four_g :
 
-    Output (keluaran)
+    Apakah 4G atau tidak
     """)
+    st.write("""8. int_memory :
+    
+    Memori Internal dalam Gigabyte
+    """)
+    st.write("""9. m_dep :
+
+    Kedalaman Seluler dalam cm
+    """)
+    st.write("""10. mobile_wt :
+
+    Berat ponsel
+    """)
+    st.write("""11. n_cores :
+
+    Jumlah inti prosesor
+    """)
+    st.write("""12. pc:
+
+    Mega piksel Kamera Utama
+    """)
+    st.write("""13. px_height :
+
+    Tinggi Resolusi Piksel
+    """)
+    st.write("""14. px_width :
+
+    Lebar Resolusi Piksel
+    """)
+    st.write("""15. ram :
+
+    Memori Akses Acak dalam Megabita
+    """)
+    st.write("""16. sc_h :
+
+    Tinggi layar ponsel dalam cm
+    """)
+    st.write("""17. sc_w :
+
+    Lebar layar ponsel dalam cm
+    """)
+    st.write("""18. talk time :
+
+    waktu terlama satu kali pengisian daya baterai akan bertahan saat Anda berada
+    """)
+    st.write("""19. three_g :
+
+    Memiliki 3G atau tidak
+    """)
+    st.write("""20. touch screen :
+
+    Memiliki layar sentuh atau tidak
+    """)
+    st.write("""21. wifi:
+
+    Ada wifi atau tidak
+    """)
+    
+    
     st.write("""Menggunakan Kolom (input) :
 
     precipitation
@@ -63,13 +120,8 @@ with data_set_description:
     """)
     st.write("""Mobile Price Classification   (output) :
     
-    1. Bream    : istilah umum bagi sejumlah spesies ikan air tawar dan ikan laut dari beragam genus yang meliputi: Abramis (misalnya A. brama, terkadang disebut bream air tawar).
-    2. Parkki   : 
-    3. Perch    : merupakan spesies ikan yang berwarna perak dengan semburat biru. Mereka memiliki mata hitam gelap yang khas dengan cincin luar berwarna kuning cerah.
-    4. Pike     : ikan dengan bentuk Mulut dan hidung berbentuk moncong dengan gigi terlihat mencolok banyak di rahang. Sirip kekuningan atau coklat kemerahan, punggung, dubur, dan ekor dengan bintik-bintik gelap menyebar. Biasanya ditemukan di air tawar meskipun baru-baru ditemukan hidup dalam air dengan kadar garam yang sedikit lebih rendah dari laut.
-    5. Roach    : merupakan ikan air tawar yang berasal dari perairan di wilayah Eropa dan Asia. Ikan jenis ini mampu hidup di perairan payau. Rutilus ritilus adalah jenis ikan omnivora yang tersebar luas di wilayah Eropa dan menjadi invasif di wilayah Irlandia dan Italia.
-    6. Smelt    : sejenis ikan kecil yang dipakai sebagai umpan.
-    7. Whitefish: adalah satu istilah perikanan yang merujuk kepada beberapa spesies ikan demersal dengan sirip, khususnya kod (Gadus morhua), whiting (Merluccius bilinearis), dan haddock (Melanogrammus aeglefinus).
+    1. 0    : tidak
+    2. 1    : ya
     
     """)
     st.write("###### Aplikasi ini untuk : Mobile Price Classification (Klasifikasi ikan di Pasar) ")
