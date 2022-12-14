@@ -83,7 +83,7 @@ with data_set_description:
     
     """)
     st.write("###### Aplikasi ini untuk : Mobile Price Classification (Klasifikasi ikan di Pasar) ")
-    st.write("###### Source Code Aplikasi ada di Github anda bisa acces di link : https://github.com/08-Ahlaqul-Karimah/project-data-mining ")
+    st.write("###### Source Code Aplikasi ada di Github anda bisa acces di link : https://github.com/elmatiaaa/project")
 
 with upload_data:
     # uploaded_files = st.file_uploader("Upload file CSV", accept_multiple_files=True)
