@@ -91,7 +91,7 @@ with upload_data:
     #     df = pd.read_csv(uploaded_file)
     #     st.write("Nama File Anda = ", uploaded_file.name)
     #     st.dataframe(df)
-    df = pd.read_csv('https://raw.githubusercontent.com/08-Ahlaqul-Karimah/machine-Learning/main/test.csv')
+    df = pd.read_csv('https://raw.githubusercontent.com/elmatiaaa/Machine-Learning/main/test.csv')
     st.dataframe(df)
 
 with preprocessing:
